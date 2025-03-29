@@ -7,7 +7,10 @@ html
     h1 Item List
     ul
       each item in items
-        li= item.name
+        li 
+          | #{item.name} 
+          form(action=`/delete/${item._id}` method="POST" style="display:inline;")
+            button(type="submit" style="color:red; margin-left:10px;" onclick="return confirm('Are you sure you want to delete this item?');") Delete
     form(action="/add" method="POST")
       input(type="text" name="name" placeholder="Enter item" required)
       button(type="submit") Add Item

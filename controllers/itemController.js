@@ -19,3 +19,13 @@ exports.addItem = async (req, res) => {
     res.status(500).send('Error saving item');
   }
 };
+exports.deleteItem = async (req, res) => {
+  try {
+      const { id } = req.params;
+      await Item.findByIdAndDelete(id);
+      res.redirect('/items');
+  } catch (error) {
+      console.error("Error deleting item:", error);
+      res.status(500).send("Internal Server Error");
+  }
+};
